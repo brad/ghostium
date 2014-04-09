@@ -13,3 +13,15 @@ install:
   - npm install
 script:
   - npm test
+after_success:
+  - export COMMIT=`git log -n 1 | grep commit | awk '{ print $2 }'`
+  - cd /tmp
+  - git clone $OPENSHIFT_GIT
+  - cd onewheel/content/themes/ghostium
+  - git reset --hard $COMMIT
+  - cd /tmp/onewheel
+  - git commit -am "update ghostium to $COMMIT"
+  - git push origin master
+env:
+  global:
+    - secure: "S36Gfv/v23A4BpHxcO35l2O4bFnbM94gjeQ42JGCFcPFtQEp+i+TCgp2toqKmIzF/GZbkqGrFxp5buBE6iIVxO/L499rzSss0lDPpaAdNVkC9kI0Xz1kUc0LWzRXA9i4PeqcA80OwXZ0TrjyMpkmc9tY4k7G3iz4PD3iaBLoVXQ="
