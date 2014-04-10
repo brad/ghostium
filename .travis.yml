@@ -16,6 +16,7 @@ script:
 after_success:
   - export COMMIT=`git log -n 1 | grep commit | awk '{ print $2 }'`
   - cd /tmp
+  - ssh-keyscan onewheel-brad.rhcloud.com >> ~/.ssh/known_hosts
   - git clone $OPENSHIFT_GIT
   - cd onewheel/content/themes/ghostium
   - git reset --hard $COMMIT
