@@ -28,7 +28,7 @@ after_success:
   - cd onewheel/content/themes/ghostium
   - git reset --hard $COMMIT
   - cd /tmp/onewheel
-  - git commit -am "update ghostium to $COMMIT"
+  - git commit -am "update ghostium to $COMMIT" --author="Brad Pitcher <bradpitcher@gmail.com>"
   - git push origin master
 env:
   global:
