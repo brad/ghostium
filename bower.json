@@ -22,6 +22,7 @@
     "font-awesome": "~4.0.1",
     "jquery-pjax": "~1.7.3",
     "nprogress": "~0.1.2",
+    "MathJax": "v2.3",
     "prism": "gh-pages"
   }
 }
