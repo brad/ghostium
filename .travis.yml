@@ -14,15 +14,17 @@ install:
 script:
   - npm test
 after_success:
+  # Determine the latest commit hash
   - export COMMIT=`git log -n 1 | grep commit | awk '{ print $2 }'`
-  - cd /tmp
+  # Add the rhcloud domain fingerprint to ssh known hosts
   - ssh-keyscan onewheel-brad.rhcloud.com >> ~/.ssh/known_hosts
   # Reconstitute private key file
   - echo -n $id_rsa_{00..24} >> ~/.ssh/id_rsa_base64
   - base64 --decode --ignore-garbage ~/.ssh/id_rsa_base64 > ~/.ssh/id_rsa
   - chmod 600 ~/.ssh/id_rsa
   # Clone the the ghost repo and update the ghostium submodule commit hash
-  - git clone $OPENSHIFT_GIT
+  - cd /tmp
+  - git clone --recursive $OPENSHIFT_GIT
   - cd onewheel/content/themes/ghostium
   - git reset --hard $COMMIT
   - cd /tmp/onewheel
