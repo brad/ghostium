@@ -15,7 +15,7 @@ script:
   - npm test
 after_success:
   # Determine the latest commit hash
-  - export COMMIT=`git log -n 1 | grep commit | awk '{ print $2 }'`
+  - export COMMIT=`git log -n 1 | grep '^commit' | awk '{ print $2 }'`
   # Add the rhcloud domain fingerprint to ssh known hosts
   - ssh-keyscan onewheel-brad.rhcloud.com >> ~/.ssh/known_hosts
   # Reconstitute private key file
